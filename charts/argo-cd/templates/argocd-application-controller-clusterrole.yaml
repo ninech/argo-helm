@@ -16,9 +16,21 @@ rules:
   resources:
   - '*'
   verbs:
+{{- if .Values.clusterAdminAccess.minimalPrivileges }}
+  - get
+  - list
+  - watch
+{{ else }}
   - '*'
+{{- end }}
 - nonResourceURLs:
   - '*'
   verbs:
+{{- if .Values.clusterAdminAccess.minimalPrivileges }}
+  - get
+  - list
+  - watch
+{{ else }}
   - '*'
+{{- end }}
 {{- end }}

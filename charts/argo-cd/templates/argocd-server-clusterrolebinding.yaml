@@ -1,4 +1,4 @@
-{{- if .Values.clusterAdminAccess.enabled }}
+{{- if and .Values.clusterAdminAccess.enabled (not .Values.clusterAdminAccess.minimalPrivileges) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
