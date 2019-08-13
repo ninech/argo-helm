@@ -13,6 +13,8 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "argo-cd.name" . }}-application-controller
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -36,7 +38,8 @@ spec:
         ports:
         - containerPort: {{ .Values.applicationController.containerPort }}
         readinessProbe:
-          tcpSocket:
+          httpGet:
+            path: /healthz
             port: {{ .Values.applicationController.containerPort }}
           initialDelaySeconds: 5
           periodSeconds: 10

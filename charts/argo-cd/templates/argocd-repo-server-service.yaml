@@ -13,5 +13,7 @@ spec:
   ports:
   - port: {{ .Values.repoServer.servicePort }}
     targetPort: {{ .Values.repoServer.servicePort }}
+  - port: {{ .Values.repoServer.metricsPort }}
+    targetPort: {{ .Values.repoServer.metricsPort }}
   selector:
     app.kubernetes.io/name: {{ include "argo-cd.name" . }}-repo-server
